@@ -1,0 +1,11 @@
+path: 2024_07_11_09_34_02/filtered_json4/YOLODataset/
+train: images/Train
+val: images/Val
+nc: 6
+names:
+- ir
+- mr
+- sr
+- so
+- lr
+- io
