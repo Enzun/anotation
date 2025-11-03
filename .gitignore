@@ -1,3 +1,7 @@
 DATA/
 datasets/
 runs/
+nnUnet/raw_data/
+nnUnet/preprocessed/
+nnUnet/results/
+nnUnet/predictions/

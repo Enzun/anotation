@@ -1,0 +1,39 @@
+# ->Predict Phase
+# たくさん画像いれてgui.pyで良くないやつをピックアップしてneedFixへ
+# convertToTiff.pyでneedFixからTiff画像にしてTiffsに保存。
+# Tiffにしたらノートパソコンから取り出してCVATにあげる ->Annotation Phase。
+# CVATでアノテーションしまくる
+# Annotation Phase -> Training Phase
+# xml達を DATA/xmls に入れる
+# labelmexml2json.py xml形式からjsonに
+# segment_filter.py 必要なラベルだけにする
+# yoloTrain.pyでTraining ※segment_filter.pyでyamlファイルが変わってるからここで変えることはない
+# -> Predict Phase
+# predict.py で試してみて良さげだったらbest.pyを取り出してノートパソコンへ入れる。
+
+------------------------------------------
+# ->Predict Phase
+# たくさん画像いれてgui.pyで良くないやつをピックアップしてneedFixへ
+# convertToTiff.pyでneedFixからTiff画像にしてTiffsに保存。
+# Tiffにしたらノートパソコンから取り出してCVATにあげる ->Annotation Phase。
+# CVATでアノテーションしまくる
+# Annotation Phase -> Training Phase
+# xml達を DATA/xmls に入れる
+# labelmexml2json.py xml形式からjsonに
+# segment_filter.py 必要なラベルだけにする
+
+gitbash使う
+nnUnet/codes/prepare_nnunet_data.py でデータ準備(json->nifti)
+python prepare_nnunet_data.py \
+;   --json_dir C:/Users/mitae/workspace/imageProcessing/datasets/2024_07_11_09_34_02/filtered_json4 \
+;   --image_dir C:/Users/mitae/workspace/imageProcessing/datasets/2024_07_11_09_34_02/filtered_json4/ \
+;   --train_ratio 0.8
+# プランニングと前処理
+python train_nnunet.py --mode plan --task_id 501
+# 学習開始（100エポック）
+python train_nnunet.py --mode train #--task_id 501 --epochs 100
+
+python codes/train_nnunet.py --mode predict --task_id 501 \
+  --input_folder C:/Users/mitae/workspace/imageProcessing/nnUnet/raw_data/Dataset501_EyeMuscleSegmentation/imagesTs
+# -> Predict Phase
+# predict.py で試してみて良さげだったらbestを取り出してノートパソコンへ入れる。
